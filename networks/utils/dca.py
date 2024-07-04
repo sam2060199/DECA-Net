@@ -118,10 +118,11 @@ class CCSABlock(nn.Module):
     def forward(self, x):
         if self.channel_att:
             x_ca = self.channel_attention(x)
-            x = self.m_sum(x, x_ca)   
+            x1 = self.m_sum(x, x_ca)
         if self.spatial_att:
             x_sa = self.spatial_attention(x)
-            x = self.m_sum(x, x_sa)   
+            x2 = self.m_sum(x, x_sa)
+        x = self.m_sum(x1, x2)
         return x
 
     def channel_attention(self, x):
